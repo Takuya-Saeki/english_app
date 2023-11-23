@@ -13,7 +13,7 @@ import re
 import csv
 
 
-def make_word_list(html_name):
+def make_word_list(html_name:str) -> [str]:
     # HTMLファイルを開く
     with open(html_name, "r", encoding="utf-8") as file:
         # ファイルの内容を読み込む
@@ -35,11 +35,15 @@ def make_word_list(html_name):
 
 
 # for文で、それぞれのhtmlからword_listを作成し、連結させる
-def words_list_to_csv(files_list, csv_name):
+def words_list_to_csv(files_list:[str], csv_name:str):
     words_list = []
     # 各htmlから単語リストを作成
     for i in range(len(files_list)):
-        words_list.append(make_word_list(files_list[i]))
+        words_list.extend(make_word_list(files_list[i]))
+    # 単語のダブりをなくす
+    words_list = list(set(words_list))
+    print("{}単語のリストをcsvファイルで保存します".format(len(words_list)))
+
     # csvファイルで保存
     with open(csv_name, "w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
