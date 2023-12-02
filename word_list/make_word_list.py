@@ -13,7 +13,7 @@ import re
 import csv
 
 
-def make_word_list(html_name:str) -> [str]:
+def make_word_list(html_name: str) -> [str]:
     # HTMLファイルを開く
     with open(html_name, "r", encoding="utf-8") as file:
         # ファイルの内容を読み込む
@@ -35,13 +35,13 @@ def make_word_list(html_name:str) -> [str]:
 
 
 # for文で、それぞれのhtmlからword_listを作成し、連結させる
-def words_list_to_csv(files_list:[str], csv_name:str):
+def words_list_to_csv(files_list: [str], csv_name: str):
     words_list = []
     # 各htmlから単語リストを作成
     for i in range(len(files_list)):
         words_list.extend(make_word_list(files_list[i]))
     # 単語のダブりをなくす
-    words_list = list(set(words_list))
+    words_list = list({word.lower() for word in set(words_list)})
     print("{}単語のリストをcsvファイルで保存します".format(len(words_list)))
 
     # csvファイルで保存
@@ -52,19 +52,34 @@ def words_list_to_csv(files_list:[str], csv_name:str):
 
 
 # 高校受験レベル、共通テストレベル、2次試験レベルの単語リストに使用するhtmlのリストを作る
-word_list_j_high_school = ["./html_folder/j_high_school.html"]
-word_list_center_test = [
-    "./html_folder/j_high_school.html",
-    "./html_folder/center_test.html",
+word_list_j_high_school = [
+    "./html_folder/j_high_school_1.html",
+    "./html_folder/j_high_school_2.html",
+    "./html_folder/j_high_school_3.html",
+    "./html_folder/j_high_school_1_horizon.html",
+    "./html_folder/j_high_school_2_horizon.html",
+    "./html_folder/j_high_school_3_horizon.html",
+    "./html_folder/j_high_school_1_newcrown.html",
+    "./html_folder/j_high_school_2_newcrown.html",
+    "./html_folder/j_high_school_3_newcrown.html",
+    "./html_folder/j_high_school_all.html",
+    "./html_folder/eiken_5.html",
+    "./html_folder/eiken_4.html",
+    "./html_folder/eiken_3.html",
 ]
-word_list_2zi_test = [
-    "./html_folder/j_high_school.html",
+word_list_center_test = [
     "./html_folder/center_test.html",
+    "./html_folder/eiken_sub1.html",
+]
+word_list_center_test.extend(word_list_j_high_school)
+word_list_2zi_test = [
     "./html_folder/kyodai.html",
     "./html_folder/todai.html",
     "./html_folder/eiken_2.html",
     "./html_folder/eiken_sub1.html",
 ]
+word_list_2zi_test.extend(word_list_center_test)
+
 # csvファイルの名前
 csv_names = [
     "./csv_folder/word_list_j_high_school.csv",
@@ -73,9 +88,9 @@ csv_names = [
 ]
 
 # レベルごとの単語帳のcsvを生成
-# 高校受験
+# 高校受験の単語リスト
 words_list_to_csv(word_list_j_high_school, csv_names[0])
-# 共通テスト
+# 共通テストの単語リスト
 words_list_to_csv(word_list_center_test, csv_names[1])
-# 2次試験
+# 2次試験の単語リスト
 words_list_to_csv(word_list_2zi_test, csv_names[2])
