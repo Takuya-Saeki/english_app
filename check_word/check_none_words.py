@@ -55,6 +55,7 @@ def set_none_words(file_path: str, text: set[str]):
 
 # CSVファイルのパス
 file_path_high = "../word_list/csv_folder/word_list_j_high_school.csv"
+file_path_center = "../word_list/csv_folder/word_list_center_test.csv"
 file_path_uni = "../word_list/csv_folder/word_list_2zi_test.csv"
 
 
@@ -66,6 +67,11 @@ print(
     "高校受験用の単語集合と比較",
     len(set_none_words(file_path_high, text)),
     set_none_words(file_path_high, text),
+)
+print(
+    "高校受験用の単語集合と比較",
+    len(set_none_words(file_path_center, text)),
+    set_none_words(file_path_center, text),
 )
 print(
     "大学受験用の単語集合と比較",
