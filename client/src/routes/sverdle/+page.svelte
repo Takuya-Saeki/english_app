@@ -4,11 +4,6 @@
   let result = "";
   const apiUrl = import.meta.env.VITE_API_URL;
 
-  const ans = (async () => {
-    const res = await fetch(`/api`);
-    return await res.json();
-  })();
-
   async function requestURL() {
     const param = {
       input_url: input_url,

@@ -2,6 +2,10 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from server.model import demo
 
+from pydantic import BaseModel
+from typing import List
+from fastapi.responses import FileResponse
+
 router = APIRouter()
 
 
@@ -12,15 +16,30 @@ async def demo_english_text():
     return JSONResponse(content=data)
 
 
-@router.get("/api/demo_japanese_text")
-async def demo_japanese_text(company: str):
-    result = await demo.demo_japanese_text()
-    data = {"message": result, "status": 200}
-    return JSONResponse(content=data)
+class TEXT(BaseModel):
+    input_url: str = ""
+    text_japanese: str = ""
+    text_english: str = ""
+    word_list: List[str] = []
 
 
-@router.get("/api/demo_word_list")
-async def demo_word_list(company: str):
-    result = await demo.demo_word_list()
-    data = {"message": result, "status": 200}
-    return JSONResponse(content=data)
+@router.post("/api/create_textbook")
+async def create_textbook(data: TEXT):
+    # ここで data.input_url を使用して処理を行う
+    data.text_japanese = demo.demo_japanese_text()
+    data.text_english = demo.demo_english_text()
+    data.word_list = demo.demo_word_list()
+    return JSONResponse(
+        content={
+            "input_url": data.input_url,
+            "text_japanese": data.text_japanese,
+            "text_english": data.text_english,
+            "word_list": data.word_list,
+        }
+    )
+
+
+@router.get("/api/audio")
+def get_audio():
+    audio_file_path = "server/audiofolder/output.mp3"  # 音声ファイルのパス
+    return FileResponse(audio_file_path, media_type="audio/mpeg")

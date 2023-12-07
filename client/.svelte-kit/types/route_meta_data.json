@@ -4,5 +4,11 @@
 	],
 	"/sverdle": [
 		"src/routes/sverdle/+page.server.js"
+	],
+	"/translate": [
+		"src/routes/translate/+page.server.js"
+	],
+	"/words_book": [
+		"src/routes/words_book/+page.server.js"
 	]
 }
