@@ -5,6 +5,9 @@
 	"/sverdle": [
 		"src/routes/sverdle/+page.server.js"
 	],
+	"/text_add_list": [
+		"src/routes/text_add_list/+page.server.js"
+	],
 	"/translate": [
 		"src/routes/translate/+page.server.js"
 	],

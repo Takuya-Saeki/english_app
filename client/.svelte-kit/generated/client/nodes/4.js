@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/translate/+page.svelte";
+export { default as component } from "../../../../src/routes/text_add_list/+page.svelte";

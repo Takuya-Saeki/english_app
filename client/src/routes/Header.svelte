@@ -26,6 +26,20 @@
       >
         <a href="/translate">Translate</a>
       </li>
+      <li
+        aria-current={$page.url.pathname.startsWith("/words_book")
+          ? "page"
+          : undefined}
+      >
+        <a href="/words_book">words_book</a>
+      </li>
+      <li
+        aria-current={$page.url.pathname.startsWith("/text_add_list")
+          ? "page"
+          : undefined}
+      >
+        <a href="/text_add_list">text_add_list</a>
+      </li>
     </ul>
     <svg viewBox="0 0 2 3" aria-hidden="true">
       <path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
